@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         try{
             if (dbConn !=null){
-                String sql = "SELECT * FROM usertable WHERE name=?AND password=?";
+                String sql = "SELECT * FROM usertable WHERE me=?AND password=?";
                 PreparedStatement ps = dbConn.prepareStatement(sql);
                 ps.setString(1,name);
                 ps.setString(2,password);
