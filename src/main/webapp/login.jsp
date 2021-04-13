@@ -6,7 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="header.jsp" %>
-Login <br>
+<h1>Login</h1>
+<%
+    if (!(request.getAttribute("message")==null)){
+        out.print("<h3>"+request.getAttribute("message")+"</h3>");
+    }
+%>
 <form method="post" action="${pageContext.request.contextPath}/login">
     <p>Username:<input type="text" name="name"/></p>
 
