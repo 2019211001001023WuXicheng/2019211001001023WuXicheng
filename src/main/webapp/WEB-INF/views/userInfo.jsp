@@ -1,21 +1,28 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Wuxicheng
-  Date: 2021/4/13
-  Time: 17:39
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.dabing.model.User" %>
 <%@include file="header.jsp" %>
 <%@page  contentType="text/html;charset=UTF-8" language="java"%>
+
 <h2>User Info</h2>
+
+
+<%--<%Cookie []allCookies=request.getCookies();--%>
+<%--for (Cookie c:allCookies){--%>
+<%--    out.println("<br/>"+c.getName()+"---"+c.getValue());--%>
+<%--}--%>
+<%--%>--%>
+<%
+    User u=(User) session.getAttribute("user");
+%>
 <table border="1" >
     <tr>
-        <td>Username</td><td><%=request.getAttribute("Username")%></td> </tr>
-    <td>Password</td><td><%=request.getAttribute("Password")%></td> </tr>
-    <td>Email</td> <td><%=request.getAttribute("Email")%></td> </tr>
-    <td>Gender</td><td><%=request.getAttribute("Gender")%></td> </tr>
-    <td>Birthdate</td> <td><%=request.getAttribute("Birthdate")%></td>
+        <td>Username</td><td><%=u.getUsername()%></td> </tr>
+    <td>Password</td><td><%=u.getPassword()%></td> </tr>
+    <td>Email</td> <td><%=u.getEmail()%></td> </tr>
+    <td>Gender</td><td><%=u.getGender()%></td> </tr>
+    <td>Birthdate</td> <td><%=u.getBirthdate()%></td>
     </tr>
+    <tr>
+        <a href="updateUser?id=<%=u.getID()%>">updateUser</a></tr>
 </table>
-<%@include file="footer.jsp" %>
 
+<%@include file="footer.jsp" %>

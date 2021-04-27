@@ -25,16 +25,29 @@ public class UserDao  implements  IUserDao{
 
     @Override
     public int deleteUser(Connection con, User user) throws SQLException {
-        String sql = "delete from usertable where id = ?";
-        return  qr.update(con,sql,new BeanListHandler<>(User.class));
+        return 0;
     }
 
     @Override
     public int updateUser(Connection con, User user) throws SQLException {
-        String sql = "update usertable set name = ?,password = ?, email = ?, gender = ?, birth = ? where id = ?";
-        return qr.update(con,sql,new Object[]{user.getUsername(),user.getPassword(),user.getEmail(),user.getGender(),user.getBirthdate(),user.getID()});
-    }
+        String sql = "update usertable set name = ?,password = ?, email = ?, gender = ?, birthdate = ? where id = ?;";
+        PreparedStatement st= con.prepareStatement(sql);
+        st.setString(1,user.getUsername());
+        st.setString(2,user.getPassword());
+        st.setString(3,user.getEmail());
+        st.setString(4,user.getGender());
+        st.setString(5, String.valueOf(user.getBirthdate()));
+        st.setInt(6,user.getID());
 
+        int i = st.executeUpdate();
+        if(i != 0){
+            return  1;
+        }else {
+            return  0;
+        }
+//        String sql = "update usertable set name = ?,password = ?, email = ?, gender = ?, birthdate = ? where id = ?";
+//        return qr.update(con,sql,new Object[]{user.getUsername(),user.getPassword(),user.getEmail(),user.getGender(),user.getBirthdate(),user.getID()});
+    }
 
     @Override
     public User findById(Connection con, Integer id) throws SQLException {
