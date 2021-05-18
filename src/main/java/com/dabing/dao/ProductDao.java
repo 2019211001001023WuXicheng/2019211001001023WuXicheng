@@ -1,9 +1,8 @@
 package com.dabing.dao;
 import com.dabing.model.Product;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 public class ProductDao implements  IProductDao{
     @Override
@@ -88,13 +87,44 @@ public class ProductDao implements  IProductDao{
 
 
     @Override
-    public Product findById(Integer productId, Connection con) {
-        return null;
+    public Product findById(Integer productId, Connection con)throws SQLException{
+        String queryString = "select * from Product where ProductId= ?";
+        PreparedStatement pt = con.prepareStatement(queryString);
+        pt.setInt(1, productId);
+        ResultSet rs = pt.executeQuery();
+        Product product = new Product();
+        while(rs.next()){
+            product.setProductId(rs.getInt("CategoryId"));
+            product.setPrice(rs.getDouble("Price"));
+            product.setProductDescription(rs.getString("ProductDescription"));
+            product.setProductId(rs.getInt("ProductId"));
+            product.setProductName(rs.getString("ProductName"));
+        }
+        return product;
     }
 
     @Override
     public List<Product> findByCategoryId(int categoryId, Connection con) {
-        return null;
+        List<Product> list=new ArrayList<Product>();
+        try {
+            String queryString = "select * from Product where CategoryId = ?";
+            PreparedStatement pt = con.prepareStatement(queryString);
+            pt.setInt(1,categoryId);
+            ResultSet rs= pt.executeQuery();
+            while(rs.next()){
+                Product product = new Product();
+                product.setCategoryId(rs.getInt("CategoryId"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setProductDescription(rs.getString("ProductDescription"));
+                product.setProductId(rs.getInt("ProductId"));
+                product.setProductName(rs.getString("ProductName"));
+                list.add(product);
+
+            } System.out.println("successful");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     @Override
@@ -104,8 +134,25 @@ public class ProductDao implements  IProductDao{
 
     @Override
     public List<Product> findAll(Connection con) throws SQLException {
+        List<Product> list=new ArrayList<Product>();
+        try {
+            String queryString = "select * from Product";
+            PreparedStatement pt = con.prepareStatement(queryString);
+            ResultSet rs= pt.executeQuery();
+            while(rs.next()){
+                Product product = new Product();
+                product.setCategoryId(rs.getInt("CategoryId"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setProductDescription(rs.getString("ProductDescription"));
+                product.setProductId(rs.getInt("ProductId"));
+                product.setProductName(rs.getString("ProductName"));
+                list.add(product);
 
-        return null;
+            } System.out.println("successful");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     @Override
@@ -116,5 +163,19 @@ public class ProductDao implements  IProductDao{
     @Override
     public List<Product> getPicture(Integer productId, Connection con) throws SQLException {
         return null;
+    }
+
+    public byte[] getPictureById(Integer productId, Connection con) throws SQLException {
+        byte[] imgByte = null;
+        String sql = "select Picture from  Product where ProductId = ?";
+        PreparedStatement pt = con.prepareStatement(sql);
+        pt.setInt(1, productId);
+        ResultSet rs = pt.executeQuery();
+        while (rs.next()) {
+            Blob blob = rs.getBlob("Picture");
+            imgByte = blob.getBytes(1, (int) blob.length());
+        }
+        System.out.println(imgByte);
+        return imgByte;
     }
 }

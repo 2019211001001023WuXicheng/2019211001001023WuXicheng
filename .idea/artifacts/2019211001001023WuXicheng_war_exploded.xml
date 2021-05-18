@@ -13,6 +13,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="2019211001001023WuXicheng" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: commons-dbutils:commons-dbutils:1.7" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/WuXicheng2019211001001023-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
