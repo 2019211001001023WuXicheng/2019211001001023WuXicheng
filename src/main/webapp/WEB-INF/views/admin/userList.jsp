@@ -30,7 +30,7 @@
 					<td class="description"><strong>Password</strong></td>
 					<td class="description"><strong>Email</strong></td>
 					<td class="description"><strong>Gender</strong></td>
-					<td class="description"><strong>Date of Birth</strong></td>
+					<td class="description"><strong>Birthdate</strong></td>
 
 					<td ></td>
 				</tr>
