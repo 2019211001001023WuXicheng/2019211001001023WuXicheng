@@ -57,7 +57,7 @@ public class UpdateUserServlet extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request, response);
             }else {
                 request.setAttribute("message","update Error!!!");
-                request.getRequestDispatcher("WEB-INF/views/updateUser.jsp").forward(request, response);
+                request.getRequestDispatcher("accountDetails").forward(request, response);
             }
 
         } catch (SQLException throwables) {
