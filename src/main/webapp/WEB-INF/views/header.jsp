@@ -157,4 +157,4 @@
 			</div>
 		</div>
 	</div><!--/header-bottom-->
-</header><!--/header-->
+</header>
