@@ -130,7 +130,7 @@ public class CalServlet extends HttpServlet {
             response.addCookie(cLength);
         }
         //todo 13 : send redirect to cal.jsp
-        response.sendRedirect("/2019211001001016_WuXicheng_war_exploded/lab3/cal.jsp");
+        response.sendRedirect("/2019211001001023_WuXicheng_war_exploded/lab3/cal.jsp");
     }
 }
 
